@@ -1,0 +1,10 @@
+# مكتب العدل — Legal Office System
+
+> نظام متكامل لإدارة مكاتب المحاماة: موكلون، قضايا، مواعيد، مستندات، عرائض، ومالية,والطقس وموشر اليوم 
+  . واجهة عربية فاخرة مع دعم اللغة الإنجليزية.
+
+The application is a private, authentication-gated SaaS for law firms. Public surface is limited to the sign-in screen.
+
+## Pages
+
+- [Home / Sign in](/): Entry point and authentication for office staff (admins, lawyers, assistants, viewers).

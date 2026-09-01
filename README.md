@@ -7,6 +7,17 @@
 
 ---
 
+## 🌐 الموقع الإلكتروني (نسخة الويب المباشرة)
+
+| العنصر | الرابط |
+|---|---|
+| 🌐 الموقع المباشر | **[https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/](https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/)** |
+| 📦 نسخة ويندوز (Release) | [GitHub Releases](https://github.com/ahmedkhaledalfky407-glitch/LegalOffice/releases) |
+
+> يعمل الموقع مباشرةً على المتصفح ويرتبط تلقائياً بقاعدة بيانات Supabase. النشر يتم تلقائياً عبر GitHub Actions عند كل تحديث لفرع `main`.
+
+---
+
 ## ✨ المميزات
 
 - **إدارة الموكلين**: بيانات كاملة (الرقم القومي، التوكيلات، الأرشيف، المحافظات) مع حالة التوكيل.
