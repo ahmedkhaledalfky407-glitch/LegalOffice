@@ -11,10 +11,11 @@
 
 | العنصر | الرابط |
 |---|---|
-| 🌐 الموقع المباشر | **[https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/](https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/)** |
+| 🌐 **الموقع الرسمي المباشر** | **[https://ahmedkhaledalfky407-glitch.github.io/](https://ahmedkhaledalfky407-glitch.github.io/)** |
+| 🔗 رابط اختصار قديم (يُحوّل تلقائياً) | `https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/` |
 | 📦 نسخة ويندوز (Release) | [GitHub Releases](https://github.com/ahmedkhaledalfky407-glitch/LegalOffice/releases) |
 
-> يعمل الموقع مباشرةً على المتصفح ويرتبط تلقائياً بقاعدة بيانات Supabase. النشر يتم تلقائياً عبر GitHub Actions عند كل تحديث لفرع `main`.
+> يعمل الموقع مباشرةً على المتصفح ويرتبط تلقائياً بقاعدة بيانات Supabase. يُنشر من مستودع `ahmedkhaledalfky407-glitch.github.io`؛ أي تحديث يُرفع لهذا المستودع يُنشر تلقائياً. أمّا مستودع `LegalOffice` فيحتوي المصدر والنسخة الصادرة.
 
 ---
 
