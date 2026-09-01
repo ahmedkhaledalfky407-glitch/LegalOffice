@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://project-happy-dev.lovable.app/sitemap.xml
+Sitemap: https://ahmedkhaledalfky407-glitch.github.io/LegalOffice/sitemap.xml
