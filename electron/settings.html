@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+    <title>إعدادات التطبيق</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .settings-card {
+            margin: 10px;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 16px;
+            color: #f1f5f9;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fbbf24;
+        }
+
+        .settings-card h3 span {
+            font-size: 18px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: #334155;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #3b4a63;
+        }
+
+        .option.active {
+            border-color: #fbbf24;
+            background: #3b4a63;
+        }
+
+        .option input[type="radio"] {
+            accent-color: #fbbf24;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .option .opt-label {
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .option .opt-desc {
+            font-size: 11px;
+            color: #94a3b8;
+            display: block;
+        }
+
+        .separator {
+            height: 1px;
+            background: #475569;
+            margin: 10px 0;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+            background: #475569;
+            color: #e2e8f0;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e293b;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #ef4444;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .btn-close:hover {
+            opacity: 0.85;
+        }
+
+        .current-source {
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="settings-card">
+        <button class="btn-close" title="إغلاق" onclick="window.settingsAPI.close()">✕</button>
+        <h3><span>⚙️</span> إعدادات التطبيق</h3>
+
+        <div class="option" data-source="lovable" onclick="selectSource('lovable')">
+            <input type="radio" name="source" value="lovable" id="opt-lovable">
+            <div class="opt-label">
+                Lovable مباشر (أونلاين)
+                <span class="opt-desc">أحدث نسخة من Lovable فوراً</span>
+            </div>
+        </div>
+
+        <div class="option" data-source="local" onclick="selectSource('local')">
+            <input type="radio" name="source" value="local" id="opt-local">
+            <div class="opt-label">
+                الملفات المحلية (Offline)
+                <span class="opt-desc">العمل بدون إنترنت</span>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="action-btns">
+            <button class="btn" onclick="window.settingsAPI.reload()">🔄 إعادة تحميل</button>
+            <button class="btn" onclick="window.settingsAPI.devtools()">🛠️ F12</button>
+        </div>
+
+        <div class="current-source" id="current-label">...</div>
+    </div>
+
+    <script>
+        // تحميل الإعدادات الحالية
+        window.settingsAPI.getConfig().then((config) => {
+            document.getElementById('current-label').textContent =
+                'المصدر الحالي: ' + config.sourceLabel;
+            updateSelection(config.source);
+        });
+
+        function updateSelection(source) {
+            document.querySelectorAll('.option').forEach((opt) => {
+                const isActive = opt.dataset.source === source;
+                opt.classList.toggle('active', isActive);
+                const radio = opt.querySelector('input[type="radio"]');
+                if (radio) radio.checked = isActive;
+            });
+        }
+
+        function selectSource(source) {
+            window.settingsAPI.setSource(source).then((res) => {
+                if (res.ok) {
+                    updateSelection(res.source);
+                    document.getElementById('current-label').textContent =
+                        'المصدر الحالي: ' + (res.source === 'lovable' ? 'Lovable مباشر (أونلاين)' : 'الملفات المحلية (Offline)');
+                }
+            });
+        }
+
+        // دعم السحب للنافذة
+        const card = document.querySelector('.settings-card');
+        let isDragging = false;
+        let startX, startY;
+
+        card.addEventListener('mousedown', (e) => {
+            // لا نسحب عند الضغط على الأزرار أو الخيارات
+            if (e.target.closest('.btn') || e.target.closest('.option') || e.target.closest('.btn-close')) return;
+            isDragging = true;
+            startX = e.screenX;
+            startY = e.screenY;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const win = window.settingsAPI.getWindowInfo();
+            // سنستخدم IPC للسحب في النسخة القادمة إن لزم
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    </script>
+</body>
+
+</html>
